@@ -32,15 +32,8 @@ class ImageView(View):
         if "run_script" in request.POST:
 
             # import function from the python file  
-            # call function 
+            # call function
             post.ocr_text = "This will be the ocr text."
             post.save()
             # return HttpResponseRedirect(reverse("posts:image_extracted", args=(post.id, )))
-            return HttpResponseRedirect(f"/posts/{post.id}/image_extracted/")
-            
-
-
-class ImageViewExtracted(View):
-    def get(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)
-        return render(request, "posts/image_extracted.html", {"post": post})
+            return HttpResponseRedirect(f"/posts/{post.id}/")

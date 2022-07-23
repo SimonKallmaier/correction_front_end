@@ -1,3 +1,8 @@
+import os
+import json
+from site import abs_paths
+import requests
+
 from ast import arg
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, CreateView, View
@@ -31,9 +36,15 @@ class ImageView(View):
         post = get_object_or_404(Post, pk=pk)
         if "run_script" in request.POST:
 
-            # import function from the python file  
-            # call function
-            post.ocr_text = "This will be the ocr text."
+            # if ocr text already exists, skip extracting text. TODO: notify user that nothing happens
+            if post.ocr_text:
+                return HttpResponseRedirect(f"/posts/{post.id}/")
+            
+            image_path = {"path": post.cover.path}
+
+            r = requests.post("http://127.0.0.1:8001/image/", data=json.dumps(image_path))
+            result = r.json()
+            post.ocr_text = result.get("text")
             post.save()
             # return HttpResponseRedirect(reverse("posts:image_extracted", args=(post.id, )))
             return HttpResponseRedirect(f"/posts/{post.id}/")

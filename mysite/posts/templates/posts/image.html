@@ -1,6 +1,14 @@
 <h1>Image view</h1>
-<h2>Title: {{ post.title }}; ocr text: {{ post.ocr_text }}</h2>
-<img src="{{ post.cover.url}}" alt="{{ post.title }}" width="400" , height="400">
+<h2>Title: {{ post.title }}</h2>
+
+<div style="display:inline-block;vertical-align:top;">
+    <img src="{{ post.cover.url}}" alt="{{ post.title }}" width="400" , height="400" />
+</div>
+<div style="display:inline-block;">
+    <p>
+        {{ post.ocr_text }}
+    </p>
+</div>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

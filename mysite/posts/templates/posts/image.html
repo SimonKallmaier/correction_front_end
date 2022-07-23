@@ -1,0 +1,8 @@
+<h1>Image view</h1>
+<h2>Title: {{ post.title }}; ocr text: {{ post.ocr_text }}</h2>
+<img src="{{ post.cover.url}}" alt="{{ post.title }}" width="400" , height="400">
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button type="submit" name="run_script">Run script</button>
+</form>

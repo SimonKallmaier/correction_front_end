@@ -6,6 +6,5 @@ app_name = "correction"
 
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', views.TextView.as_view(), name='show_text'),
+    path('', views.index, name='index'),
 ]
